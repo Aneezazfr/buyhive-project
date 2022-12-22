@@ -1,0 +1,10 @@
+body{
+  margin: 0;
+  font-family: Avenir LT Pro,sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: Avenir LT Pro,sans-serif;
+}

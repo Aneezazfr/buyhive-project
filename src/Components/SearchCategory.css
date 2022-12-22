@@ -1,0 +1,50 @@
+.searchBar{
+  width: 70%;
+}
+.searchBar:focus{
+    outline: none !important;
+}
+.selectCategory{
+    width: 30%;
+    padding-left: 0.5rem;
+}
+.selectCategory:focus{
+    outline: none !important;
+}
+.img-USA{
+    width: 2rem;
+    /* max-width: 100%;
+    height: auto; */
+    margin-right: 0.5rem;
+}
+.select-arrow{
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    padding-right: 15px;
+    background-image: url('https://static.thenounproject.com/png/551749-200.png');
+    background-repeat: no-repeat;
+    background-position: calc(100% - 3px) center;
+    background-size: 17px;
+}
+
+@media screen and (max-width: 992px) {
+    .hide-category-btn {
+      display: none !important;
+    }
+    .hide-search-btn-text {
+      display: none !important; 
+    }
+    .hide-category-dropdown {
+        display: none !important;
+    }
+  }
+  @media screen and (min-width: 992px) {
+    .hide-long-category-btn {
+        display: none !important;
+      }
+    
+    .hide-search-btn-icon {
+        display: none !important; 
+    }
+  }
