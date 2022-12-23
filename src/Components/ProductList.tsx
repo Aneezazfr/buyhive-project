@@ -21,6 +21,7 @@ export const ProductList: React.FC<IProductListProps> = ({
   const authCxt = useContext(AuthContext);
 
   useEffect(() => {
+    getProducts();
     if (authCxt.getProducts.length <= 18) {
       getProducts();
     }
@@ -37,7 +38,7 @@ export const ProductList: React.FC<IProductListProps> = ({
     try {
       const response = await axios.get(`http://localhost:3000/api/v1/products`);
       const data = response.data;
-
+      setProducts(data);
       authCxt.setProducts(data);
       // setProducts(authCxt.getProducts)
       setProductCount(authCxt.getProducts.length);
@@ -50,9 +51,7 @@ export const ProductList: React.FC<IProductListProps> = ({
     <>
       <h1></h1>
       <div className="row">
-        {/* setProductCount(products.length) */}
-        {authCxt.getProducts.map((product: IProduct) =>
-          // if (search == "" || crypto.name.toLowerCase().includes(search.toLowerCase())) {}
+        {products.map((product: IProduct) =>
           showBox ? (
             <Products
               key={product.id}
@@ -67,7 +66,7 @@ export const ProductList: React.FC<IProductListProps> = ({
             <div></div>
           )
         )}
-        {authCxt.getProducts.map((product: IProduct) =>
+        {products.map((product: IProduct) =>
           showList ? (
             <ProductCard
               key={product.id}
@@ -82,7 +81,6 @@ export const ProductList: React.FC<IProductListProps> = ({
             <div></div>
           )
         )}
-        {/* {showList} ? null : null */}
       </div>
     </>
   );

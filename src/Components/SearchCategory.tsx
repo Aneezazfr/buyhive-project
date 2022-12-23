@@ -13,6 +13,8 @@ const SearchCategory = () => {
 
   const [selectCategory, setSelectCategory] = useState<string>("");
   const [parentCategories, setParentCategories] = useState<any>([]);
+  const [pCategory,setPCategory] = useState<any>();
+  const [subCategories, setSubCategories] = useState<any>([]);
   const authCxt = useContext(AuthContext);
 
   const [query, setQuery] = useState("");
@@ -22,14 +24,12 @@ const SearchCategory = () => {
     setModal(!modal);
   };
 
-  // useEffect(() => {
-  //   getCategories()
-  //   // getProducts()
-  // },[])
-
   useEffect(() => {
     getParentCategories();
     removeDup(arr1);
+  },[categories])
+
+  useEffect(() => {
     getCategories();
     getProducts();
   }, [selectCategory, query]);
@@ -49,10 +49,14 @@ const SearchCategory = () => {
   };
   const getProducts = async () => {
     try {
-      let url = "?";
+      let url = "";
       if (selectCategory.length !== 0) {
         url = `?sub_categories=${selectCategory}`;
       }
+      // if(parentCategories){
+      //   debugger
+      //   url = `?pCategory=${parentCategories}`;
+      // }
       // debugger
       const response = await axios.get(
         `http://localhost:3000/api/v1/products` + url
@@ -84,15 +88,13 @@ const SearchCategory = () => {
       (category, index) => (arr1[index] = category.parent_category)
     );
     return arr1;
-    // console.log("arrrrrrr", arr1);
-    // let arr2:any = [];
-    // console.log(removeDup(arr1))
   };
   // to remove duplication
   const removeDup = (data: []) => {
-    return console.log(
-      data.filter((item, index) => data.indexOf(item) === index)
-    );
+    let arr2: any = [];
+    arr2 = data.filter((item, index) => data.indexOf(item) === index)
+    setParentCategories(arr2);
+    console.log("parentCategories",parentCategories)
   };
   return (
     <>
@@ -172,6 +174,15 @@ const SearchCategory = () => {
           data-aos-duration="500"
         >
           <div className="row">
+            {parentCategories.map((name: any) => (  
+              <div className="col">
+                <h3>{name}</h3> 
+                {/* <>{setPCategory(name)}</> */}
+                <li></li>
+              </div> 
+            ))}  
+          </div>
+          <div className="row"> 
             {categories.map((category) => (
               <div className="col">
                 <h3>{category.parent_category}</h3>
